@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Informe Mensual</h1>
+
+  <h2>Informe de Ventas Mensuales</h2>
+  <form method="post" action="{% url 'informe_mensual' %}">
+    {% csrf_token %}
+    <label for="mes">Mes:</label>
+    <select name="mes">
+      <option value="1">Enero</option>
+      <option value="2">Febrero</option>
+      <option value="3">Marzo</option>
+      <option value="4">Abril</option>
+      <option value="5">Mayo</option>
+      <option value="6">Junio</option>
+      <option value="7">Julio</option>
+      <option value="8">Agosto</option>
+      <option value="9">Septiembre</option>
+      <option value="10">Octubre</option>
+      <option value="11">Noviembre</option>
+      <option value="12">Diciembre</option> 
+    </select>
+    <br>
+    <label for="anio">Año:</label>
+    <input type="number" name="anio" min="2000" max="2099" step="1">
+    <br>
+    <button type="submit">Generar Informe</button>
+  </form>
+  
+  {% if ventas %}
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre del producto</th>
+          <th>ID del producto</th>
+          <th>Precio del producto</th>
+          <th>Lote del producto</th>
+          <th>Total</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for venta in ventas %}
+          <tr>
+            <td>{{ venta.product_name }}</td>
+            <td>{{ venta.product_id }}</td>
+            <td>{{ venta.product_price }}</td>
+            <td>{{ venta.product_lot }}</td>
+            <td>{{ venta.total }}</td>
+            <td>{{ venta.fecha }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No hay ventas registradas para el mes {{ mes }} y año {{ anio }}.</p>
+  {% endif %}
+{% endblock %}

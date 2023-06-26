@@ -1,0 +1,28 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farmacia - {% block title %}{% endblock %}</title>
+    <!-- Agrega tus enlaces a archivos CSS o scripts JS aquí -->
+</head>
+<body>
+    <header>
+        <h1>Farmacia</h1>
+        <!-- Agrega el contenido específico del encabezado si lo deseas -->
+    </header>
+
+    <nav>
+        <!-- Agrega tu navegación si lo deseas -->
+    </nav>
+
+    <main>
+        {% block content %}
+        <!-- Agrega el contenido específico de cada página aquí -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Agrega el contenido del pie de página si lo deseas -->
+    </footer>
+</body>
+</html>
