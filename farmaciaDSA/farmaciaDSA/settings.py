@@ -55,7 +55,7 @@ ROOT_URLCONF = 'farmaciaDSA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['clientes.html', 'registroClientes.html', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
