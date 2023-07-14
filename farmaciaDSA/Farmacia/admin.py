@@ -1,7 +1,8 @@
 from django.contrib import admin
+from .models import Product
 
 # Register your models here.
 
-from Farmacia.models import product
 
-admin.site.register(product)
+
+admin.site.register(Product)
