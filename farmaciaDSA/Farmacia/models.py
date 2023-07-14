@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Product(models.Model):
@@ -8,6 +9,10 @@ class Product(models.Model):
     available = models.CharField(max_length=25)
     category = models.CharField(max_length=25)
     lote = models.IntegerField()
+
+    def get_absolute_url(self):
+        return reverse("productos", kwargs={"pk": self.pk}) # entre llaves = diccionario python /post_detal ya que la app se llama post
+
 
 
 
