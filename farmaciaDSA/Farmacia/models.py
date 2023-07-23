@@ -10,7 +10,8 @@ class product(models.Model):
 class clientes(models.Model):
     cliente_name = models.CharField(max_length=35)
     cliente_apellido = models.CharField(max_length=35)
+    cliente_telefono = models.CharField(max_length=35)
+    cliente_correo = models.CharField(max_length=35)
     cliente_cedula = models.CharField(max_length=15)
-    cliente_edad = models.IntegerField()
     cliente_fecha = models.DateField()
     
