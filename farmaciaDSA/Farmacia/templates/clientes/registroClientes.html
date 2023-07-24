@@ -1,12 +1,48 @@
-{% extends "comun/base.html" %} {% block content %} 
+{% extends "comun/base.html" %} 
+
+{% block content %} 
 
 
-<h1>
+  {% if forms.errors %}
+
+  <span> 
+    <div class="alert alert-danger" role="alert">
+      Error en el formulario!
+    </div>  
+  </span>
+
+  {% endif %}
+
+  <h1>Registro de clientes</h1>
+
+  <form action="{% url "guardarCliente" %}">
+
+    {% csrf_token %}
+
+    {% if mensaje %}
+      <span>
+        <div class="alert alert-success" role="alert">
+          Cliente registrado con exito
+        </div>
+      </span>
+    {% endif %}
+    
+    {{ form }}
+    
+    <button type="submit" class="btn btn-primary">Guardar</button>
+
+  </form>
+
+
+
+
+
+{% comment %} <h1>
     registro
 </h1>
 
 <form>
-    {% comment %} nombre y apellido {% endcomment %}
+   
     <div class="form-group">
         <div class="row">
             <div class="col">
@@ -35,7 +71,9 @@
       <label class="form-check-label" for="exampleCheck1">Subscribe</label>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </form> {% endcomment %}
 
 
 {% endblock %}
+
+ {% comment %} nombre y apellido {% endcomment %}
