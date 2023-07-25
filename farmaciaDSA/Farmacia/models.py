@@ -2,10 +2,12 @@ from django.db import models
 
 # Create your models here.
 class product(models.Model):
-    product_name = models.CharField(max_length=25)
-    product_id = models.CharField(max_length=25)
-    product_price = models.IntegerField()
-    product_lot = models.IntegerField()
+    name = models.CharField(max_length=25)
+    id = models.IntegerField(primary_key=True)
+    price_ref = models.FloatField()#precio en dolares
+    available = models.CharField(max_length=25)
+    category = models.CharField(max_length=25)
+    lote = models.IntegerField()
 
 class clientes(models.Model):
     cliente_name = models.CharField(max_length=35)
