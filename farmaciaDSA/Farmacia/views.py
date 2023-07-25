@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpRequest
 
 from Farmacia.forms import ClienteFormulario
-
+from Farmacia.models import clientes
 
 # Create your views here.
 
@@ -36,8 +36,9 @@ def procesarCliente(request):
      return render(request, "clientes/registroClientes.html", {"form":cliente, "mensaje:": 'Ok'})
 
 
-def clientes(request):
-    return render(request, 'clientes/clientes.html',{})
+def clientess(request):
+     clients = clientes.objects.all()
+     return render(request, 'clientes/clientes.html',{"clientes": clients})
 
     
 

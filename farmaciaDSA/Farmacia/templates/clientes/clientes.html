@@ -12,21 +12,31 @@
         <th scope="col">Cedula</th>
         <th scope="col">Telefono</th>
         <th scope="col">Correo</th>
+        <th scope="col">Fecha de registro</th>
         <th scope="col">Opciones</th>
+        
       </tr>
     </thead>
     <tbody>
+    
+      {% for cliente in clientes %}
       <tr>
-        <th scope="row"></th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <th scope="row">{{ cliente.id }}</th>
+        <td>{{ cliente.cliente_name }} {{ cliente.cliente_apellido }}</td>
+        <td>{{ cliente.cliente_cedula }}</td>
+        <td>{{ cliente.cliente_telefono}}</td>
+        <td> {{cliente.cliente_correo}}</td>
+        <td> {{cliente.cliente_fecha}}</td>
         <td> 
             <button type="button" class="btn btn-light btn-sm">Editar</button> 
             <button type="button" class="btn btn-light btn-sm">Eliminar</button>
         </td>
       </tr>
+      {% empty %}
+      <tr>
+        <td colspan="7">No hay clientes registrados.</td>
+      </tr>
+      {% endfor %}
     </tbody>
   </table>
 
