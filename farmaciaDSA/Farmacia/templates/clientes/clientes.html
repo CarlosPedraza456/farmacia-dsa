@@ -4,6 +4,16 @@
 
 <h1>Clientes Registrados</h1>
 
+<div class="row col-12 justify-content-end mb-2 pr-0">
+  <a class="btn btn-success col-md-2" href=" {% url 'registroCliente' %} ">Agregar nuevo Cliente</a>
+</div>
+
+{% if mensaje %}  
+    <div class="alert alert-success" role="alert">
+      Cliente Eliminado con exito
+    </div>
+{% endif %}
+
 <table class="table table-dark">
     <thead>
       <tr>
@@ -28,8 +38,8 @@
         <td> {{cliente.cliente_correo}}</td>
         <td> {{cliente.cliente_fecha}}</td>
         <td> 
-            <button type="button" class="btn btn-light btn-sm">Editar</button> 
-            <button type="button" class="btn btn-light btn-sm">Eliminar</button>
+            <a class="btn btn-light btn-sm" href=" {% url 'editarCliente' cliente.id %} ">Editar</a> 
+            <a class="btn btn-light btn-sm" href=" {% url 'eliminarCliente' cliente.id %} ">Eliminar</a>
         </td>
       </tr>
       {% empty %}
