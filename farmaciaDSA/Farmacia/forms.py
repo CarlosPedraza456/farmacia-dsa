@@ -6,3 +6,9 @@ class ClienteFormulario(forms.ModelForm):
         model = clientes
         fields = '__all__'
         widgets = {'cliente_fecha': forms.DateInput(attrs={'type':'date'})}
+
+class ProductoFormulario(forms.ModelForm):
+
+    class Meta:
+        model = product
+        fields = '__all__'

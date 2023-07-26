@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'Farmacia'
 ]
 
@@ -55,7 +56,17 @@ ROOT_URLCONF = 'farmaciaDSA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ 'home.html', 'clientes/clientes.html', 'clientes/registroClientes.html', 'clientes/ediClientes.html' ],
+        'DIRS': [ 'home.html', 
+                 'clientes/clientes.html', 
+                 'clientes/registroClientes.html', 
+                 'clientes/editClientes.html', 
+                 'producto/productos.html', 
+                 'producto/editProductos.html', 
+                 'producto/registroProductos.html',
+                 'ventas/ventas.html',
+                 'ventas/exportarPDF',
+                 'add_ventas.html',
+                 'ticket.html', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

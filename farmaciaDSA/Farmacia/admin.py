@@ -5,5 +5,6 @@ from django.contrib import admin
 from Farmacia.models import product
 from Farmacia.models import clientes
 
-admin.site.register(product)
+
 admin.site.register(clientes)
+admin.site.register(product)
