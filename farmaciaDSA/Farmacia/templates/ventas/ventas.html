@@ -35,20 +35,18 @@
         <a class="btn btn-success col-md-2 ml-1" href=" {% url 'registroProducto' %} ">Agregar nuevo Producto</a>
       </div> 
 </div>
-<form >
-    <form>
-        <div class="client-selected container-lg" id="client-selected" > </div>
-        <div class="product-selected container-lg" id=""> <h2 id="product-selected"></h2></div>
-        <div class="product-selected container-lg" id="product-selected-1"> </div>
-        <div class="product-selected container-lg" id="product-selected-2"> </div>
-        <div class="product-selected container-lg" id="product-selected-3"> </div>
-    </form>
+
+    <div class="client-selected container-lg" id="client-selected" > </div>
+    <div class="product-selected container-lg" id=""> <h2 id="product-selected"></h2></div>
+    <div class="product-selected container-lg" id="product-selected-1"> </div>
+    <div class="product-selected container-lg" id="product-selected-2"> </div>
+    <div class="product-selected container-lg" id="product-selected-3"> </div>
+
 
     <div class="product-selected container-lg" id=""> 
-        <input type="submit" class="btn btn-primary" onclick="verCuenta()" value="calcular" ></input>
+        <button type="button" class="btn btn-primary" onclick="verCuenta()" value="calcular" >calcular</button>
     </div>
 
-</form>
 
 
 <div class="container-lg">
@@ -170,7 +168,7 @@
             </select>
           `
           document.querySelector('#product-selected-3').innerHTML =`
-            <button type="submit" class="btn btn-primary mt-4 mb-4" onclick="arregloCantidades()" value="Agregar" >Agregar</button>
+            <button type="button" class="btn btn-primary mt-4 mb-4" onclick="arregloCantidades()" value="Agregar" >Agregar</button>
           `
         ;
         //document.querySelector('#products-selected').innerHTML = producto_vender;
