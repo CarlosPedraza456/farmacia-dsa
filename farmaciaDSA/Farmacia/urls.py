@@ -1,12 +1,15 @@
 from django.urls import path
-from .views import Productos, Home,AgregarProducto, Proveedores,AgregarProveedor, EditarProductoView, DeleteProductoView
-
+from .views import Productos, Home,AgregarProductoView, EditarProductoView, DeleteProductoView
+from .views import Proveedores,AgregarProveedorView,EditarProveedorView,DeleteProductoView
 urlpatterns = [
-    path('Productos/', Productos.as_view(), name="productos"),
-    path('Productos/agregar/', AgregarProducto.as_view(), name="agregarProductos"),
-    path('productos/<int:pk>/editar/', EditarProductoView.as_view(), name='editarProducto'),
-    path('productos/<int:pk>/eliminar/', DeleteProductoView.as_view(), name='producto_delete'),
-    path('Proveedores/', Proveedores.as_view(), name="proveedores"),
-    path('AgregarProveedor/', AgregarProveedor.as_view(), name="agregarProveedor"),
     path("", Home.as_view(), name="home"),
+    path('Productos/', Productos.as_view(), name="producto_list"),
+    path('Productos/add/', AgregarProductoView.as_view(), name="producto_add"),
+    path('productos/<int:pk>/edit/', EditarProductoView.as_view(), name='producto_edit'),
+    path('productos/<int:pk>/delete/', DeleteProductoView.as_view(), name='producto_delete'),
+    path('Proveedores/', Proveedores.as_view(), name="proveedor_list"),
+    path('Proveedores/add/', AgregarProveedorView.as_view(), name="proveedor_add"),
+    path('Proveedores/<int:pk>/edit/', EditarProveedorView.as_view(), name='proveedor_edit'),
+    path('productos/<int:pk>/delete/', DeleteProductoView.as_view(), name='proveedor_delete'),
+    
 ]
