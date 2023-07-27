@@ -91,4 +91,6 @@ def eliminarProducto(request, id_producto):
 """ ventas """
 
 def ventas(request):
-     return render(request, 'ventas/ventas.html', {})
+     products = product.objects.all()
+     clients = clientes.objects.all()
+     return render(request, 'ventas/ventas.html', {"productos": products,"clientes":clients})

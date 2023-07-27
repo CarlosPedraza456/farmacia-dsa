@@ -23,8 +23,9 @@
         <th scope="col">Disponibilidad</th>
         <th scope="col">Categoria</th>
         <th scope="col">Lote</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Iva</th>
         <th scope="col">Opciones</th>
-        
       </tr>
     </thead>
     <tbody>
@@ -37,6 +38,11 @@
         <td>{{ producto.available }}</td>
         <td>{{ producto.category }}</td>
         <td>{{ producto.lote }}</td>
+        <td>{{ producto.cantidad }}</td>
+        <td> {% if producto.iva %} Si
+          {% else %}
+          No
+          {% endif %} </td>
         <td> 
             <a class="btn btn-light btn-sm" href=" {% url 'editarProducto' producto.id %} ">Editar</a> 
             <a class="btn btn-light btn-sm" href=" {% url 'eliminarProducto' producto.id %} ">Eliminar</a>
@@ -44,7 +50,7 @@
       </tr>
       {% empty %}
       <tr>
-        <td colspan="8">No hay Productos registrados.</td>
+        <td colspan="10">No hay Productos registrados.</td>
       </tr>
       {% endfor %}
     </tbody>

@@ -1,0 +1,190 @@
+{% extends "comun/base.html" %} 
+
+{% block content %} 
+
+
+
+<div class="container-lg">
+    <h1>Venta</h1>
+    <h2>Lista de Clientes</h2>
+    <select class="form-select"  id="select-clientes" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        {% for cliente in clientes %}
+        <option value="{{cliente.id}}">{{ cliente.cliente_name }} {{ cliente.cliente_apellido }}</option>
+        {% endfor %}
+      </select>
+      <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
+        <a class="btn btn-success col-md-2" href=" {% url 'registroCliente' %} ">Agregar nuevo Cliente</a>
+      </div>
+</div>
+
+<div class="container-lg">
+    <h2>Lista de Productos</h2>
+    <select class="form-select" id="select-productos" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        {% for producto in productos %}
+        <option id="selectedProduct" value="{{producto.price_ref}}" >
+                producto: {{ producto.name }} Cantidad disponible: {{ producto.cantidad }} Unidades. Precio($): {{ producto.price_ref }} {% if producto.iva %} $ + iva {% else %} $ {% endif %}
+        </option>
+        {% endfor %}
+
+        
+
+      </select>
+      <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
+        <a class="btn btn-success col-md-2 ml-1" href=" {% url 'registroProducto' %} ">Agregar nuevo Producto</a>
+      </div> 
+</div>
+<form >
+    <form>
+        <div class="client-selected container-lg" id="client-selected" > </div>
+        <div class="product-selected container-lg" id=""> <h2 id="product-selected"></h2></div>
+        <div class="product-selected container-lg" id="product-selected-1"> </div>
+        <div class="product-selected container-lg" id="product-selected-2"> </div>
+        <div class="product-selected container-lg" id="product-selected-3"> </div>
+    </form>
+
+    <div class="product-selected container-lg" id=""> 
+        <input type="submit" class="btn btn-primary" onclick="verCuenta()" value="calcular" ></input>
+    </div>
+
+</form>
+
+
+<div class="container-lg">
+    <h1>Productos seleccionados</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Productos</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Precio($)</th>
+            <th scope="col">Iva</th>
+            <th scope="col">Total($)</th>
+          </tr>
+        </thead>
+        <tbody id="product-list">
+        </tbody>
+        
+      </table>
+      <div> <h3>Total</h3> 
+        <div class="product-selected container-lg" id="total-price"> </div>
+      </div>
+      <div> <h3>Completar Venta</h3> 
+        <input type="submit" class="btn btn-primary" onclick="verCuenta()" value="Completar" ></input>
+      </div>
+ 
+</div>
+<script>
+
+    let data = window.data;
+
+    let opciones_producto = []
+    let btn_agregar = document.getElementById('submit')
+    const producto_selecionado = document.getElementById('selectedProduct').innerText
+    let lista_elementos = document.getElementById('product-list')
+    let campo_cantidad_elementos = document.getElementById('cantidad_vender')
+
+    var arreglo_lista = [] //este arreglo almacenara 1 lista de "N vengas las cuales tendran los campos: Producto + descripcion, cantidad, el precio y si tiene o no iba"
+    
+    function arregloCantidades(){
+        var cantidad = document.getElementById("cantidad-productos").value
+        var precio = document.getElementById("select-productos").value
+        var iva_producto = document.getElementById("iva-select").value
+        var producto_seleccionado = document.getElementById("product-selected").innerHTML
+        var producto_vendido = new Object()
+        /*console.log(cantidad)
+        console.log(precio)
+        console.log(iva_producto)
+        console.log(producto_seleccionado)*/
+        producto_vendido.producto = producto_seleccionado;
+        producto_vendido.cantidad = cantidad;
+        producto_vendido.precio = precio;
+        producto_vendido.iva = iva_producto;
+        if(cantidad <= 0)
+            alert("No se puede agregar, la cantidad es 0 o menor")
+        if( cantidad > 0 ){
+            arreglo_lista.push(producto_vendido);
+            alert("producto agregado a la lista de forma correcta")
+            return arreglo_lista;
+        }
+    }
+
+    var arreglo_venta = []
+    function verCuenta(){ //Aqui vamos a hacer el recorrido del arreglo para generar la venta  
+        //arreglo_venta.push(arreglo_lista)
+        var precioTotal;
+        var iva;
+        var sumaTotal=0;
+        var iva_tabla;
+        for(let i=0; i<arreglo_lista.length; i++){
+            console.log("producto:" + arreglo_lista[i].producto)
+            if( (arreglo_lista[i].iva) == "false"){
+                console.log("Sin iva")
+                precioTotal = arreglo_lista[i].precio * arreglo_lista[i].cantidad
+                console.log("precio total: " + precioTotal)
+                iva_tabla = "0"
+            }
+            if(arreglo_lista[i].iva == "true" ){
+                console.log("iva:")
+                var precio_Aux = arreglo_lista[i].precio * arreglo_lista[i].cantidad;
+                iva =  (16 * precio_Aux) / 100;
+                var precioTotal = precio_Aux + iva;
+                console.log("precio total: " + precioTotal)
+                iva_tabla = "16%"
+            }
+            sumaTotal = sumaTotal + precioTotal;
+            document.querySelector("#product-list").innerHTML += 
+            `<tr>  
+                <td>`+ arreglo_lista[i].producto + `</td>
+                <td>`+ arreglo_lista[i].cantidad + `</td>
+                <td>`+ arreglo_lista[i].precio + ` $` + `</td>
+                <td>`+ iva_tabla + `</td>
+                <th>`+ precioTotal +` $`+ `</td>
+            </tr>` 
+        }
+        document.querySelector("#total-price").innerHTML = sumaTotal + `$`;
+        console.log(sumaTotal)
+        console.log(arreglo_lista);
+    }
+
+    //Este es el chivo que mas mea
+    document.getElementById('select-productos').addEventListener("change", (event) => {
+        const selectedOptionContent = event.target.querySelector('option:checked').textContent;
+        document.querySelector('#product-selected').innerHTML = selectedOptionContent + `
+       
+          `
+          document.querySelector('#product-selected-1').innerHTML =`
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-sm">Cantidad</span>
+                </div>
+                <input type="number" min="1 class="form-control" id="cantidad-productos" aria-label="Small" aria-describedby="inputGroup-sizing-sm" pattern="^[0]+" required>
+            </div>
+          `
+          document.querySelector('#product-selected-2').innerHTML = `
+            <span>Seleccione si el producto tiene IVA <span>
+            <select class="form-select" aria-label="Default select example" id="iva-select">
+                <option value=true>Si</option>
+                <option value=false>No</option>
+            </select>
+          `
+          document.querySelector('#product-selected-3').innerHTML =`
+            <button type="submit" class="btn btn-primary mt-4 mb-4" onclick="arregloCantidades()" value="Agregar" >Agregar</button>
+          `
+        ;
+        //document.querySelector('#products-selected').innerHTML = producto_vender;
+    } );
+    document.getElementById('select-clientes').addEventListener("change", (event) => {
+        const selectedOptionContent = event.target.querySelector('option:checked').textContent;
+        document.querySelector('#client-selected').innerHTML = selectedOptionContent;
+    } );
+
+
+
+//agregarElemento()
+
+</script>
+
+
+{% endblock %}

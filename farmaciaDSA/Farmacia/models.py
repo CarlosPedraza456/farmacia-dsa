@@ -9,6 +9,11 @@ class product(models.Model):
     available = models.CharField(max_length=25)
     category = models.CharField(max_length=25)
     lote = models.IntegerField()
+    cantidad =  models.IntegerField()
+    iva = models.BooleanField()
+
+    def __str__(self):
+        return self.name
 
 class clientes(models.Model):
     cliente_name = models.CharField(max_length=35)
@@ -18,6 +23,8 @@ class clientes(models.Model):
     cliente_cedula = models.CharField(max_length=15)
     cliente_fecha = models.DateField()
 
+    def __str__(self):
+        return self.cliente_name
 
  
 class Egreso(models.Model):
