@@ -4,8 +4,8 @@
 
 <h1>Venta</h1>
 
-<div class="container-lg">
-    
+<div class="container container-clientes"> <!-- Contenedor clientes -->
+  <div class="container-lg"> 
     <h2>Lista de Clientes Registrados</h2>
     <select class="form-select"  id="select-clientes" aria-label="Default select example">
         {% for cliente in clientes %}
@@ -13,13 +13,16 @@
         {% endfor %}
       </select>
       <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
-        <a class="btn btn-success col-md-2" href=" {% url 'registroCliente' %} ">Agregar nuevo Cliente</a>
+        <a class="btn btn btn-primary col-md-2" href=" {% url 'registroCliente' %} ">+Agregar nuevo Cliente</a>
       </div>
+  </div>
 </div>
 
-<div class="container-lg">
+
+<div class="container container-products"> <!-- Contenedor productos -->
+  <div class="container-lg"> 
     <h2>Lista de Productos</h2>
-    <table class="table table-dark">
+    <table class="table table-striped table-bordered table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -49,8 +52,8 @@
             No
             {% endif %} </td>
           <td> 
-              <a class="btn btn-light btn-sm" href=" {% url 'editarProducto' producto.id %} ">Editar</a> 
-              <a class="btn btn-light btn-sm" href=" {% url 'eliminarProducto' producto.id %} ">Eliminar</a>
+              <a class="btn btn-primary" href=" {% url 'editarProducto' producto.id %} ">Editar</a> 
+              <a class="btn btn-primary" href=" {% url 'eliminarProducto' producto.id %} ">Eliminar</a>
           </td>
         </tr>
         {% empty %}
@@ -68,9 +71,11 @@
         {% endfor %}
       </select>
       <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
-        <a class="btn btn-success col-md-2 ml-1" href=" {% url 'registroProducto' %} ">Agregar nuevo Producto</a>
+        <a class="btn btn btn-primary col-md-2 ml-1" href=" {% url 'registroProducto' %} ">+Agregar nuevo Producto</a>
       </div> 
+  </div>
 </div>
+
 
     <div class="client-selected container-lg" id="client-selected" > </div>
     <div class="product-selected container-lg" id=""> <h2 id="product-selected"></h2></div>
