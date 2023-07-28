@@ -3,8 +3,10 @@ from django.http import HttpRequest
 
 from Farmacia.forms import ClienteFormulario
 from Farmacia.forms import ProductoFormulario
+from Farmacia.forms import ProveedorFormulario
 from Farmacia.models import clientes
 from Farmacia.models import product
+from Farmacia.models import Proveedor
 from Farmacia.models import Egreso
 from Farmacia.models import ProductosEgreso
 
@@ -67,12 +69,12 @@ def procesarProducto(request):
           producto_procesar.save()
           producto_procesar = ProductoFormulario()
      
-     return render(request, "producto/registroProductos.html", {"form": producto_procesar, "mensaje": 'Ok'})
+     return render(request, "producto/registroProductos.html", {"form":producto_procesar, "mensaje": 'Ok'})
 
 def editarProducto(request, id_producto):
      producto_editar = product.objects.filter(id=id_producto).first()
      form = ProductoFormulario(instance=producto_editar)
-     return render(request, "producto/editProductos.html", {"form": form, 'producto': producto_editar})
+     return render(request, "producto/editProductos.html", {"form": form, 'producto':producto_editar})
 
 def actualizarProducto(request, id_producto):
      producto_actualizado = product.objects.get(pk=id_producto)
@@ -80,13 +82,13 @@ def actualizarProducto(request, id_producto):
      if form.is_valid():
           form.save()
      productos = product.objects.all()
-     return render(request, "producto/productos.html", {"productos": productos, "mensaje": 'Ok'})
+     return render(request, "producto/productos.html", {"productos":productos, "mensaje": 'Ok'})
 
 def eliminarProducto(request, id_producto):
      producto = product.objects.get(pk=id_producto)
      producto.delete()
      productos = product.objects.all()
-     return render(request, "producto/productos.html", {"productos": productos, "mensaje": 'Ok'})
+     return render(request, "producto/productos.html", {"productos":productos, "mensaje": 'Ok'})
 
 """ ventas """
 
@@ -97,3 +99,40 @@ def ventas(request):
 
 def lista_ventas(request):
      return render(request, 'ventas/lista_ventas.html',{})
+
+""""Proveedores"""
+
+def proveedoress(request):
+     providers = Proveedor.objects.all()
+     return render(request, 'proveedores/proveedores_list.html', {"proveedores":providers})
+
+def registroProveedores(request):
+     proveedor_agregar = ProveedorFormulario()
+     return render(request, "proveedores/proveedores_add.html", {"form":proveedor_agregar})
+
+def procesarProveedor(request):
+     proveedor_Procesar = ProveedorFormulario(request.POST)
+     if proveedor_Procesar.is_valid():
+          proveedor_Procesar.save()
+          proveedor_Procesar = ProveedorFormulario()
+     
+     return render(request, "proveedores/proveedores_add.html", {"form":proveedor_Procesar, "mensaje": 'Ok'})
+
+def editarProveedor(request, id_Proveedor):
+     proveedor_Editar = Proveedor.objects.filter(id=id_Proveedor).first()
+     form = ProveedorFormulario(instance=proveedor_Editar)
+     return render(request, "proveedores/proveedores_edit.html", {"form": form, 'proveedor': proveedor_Editar})
+
+def actualizarProveedor(request, id_Proveedor):
+     proveedor_actualizado = Proveedor.objects.get(pk = id_Proveedor)
+     form = ProveedorFormulario(request.POST, instance=proveedor_actualizado)
+     if form.is_valid():
+          form.save()
+     proveedores = Proveedor.objects.all()
+     return render(request, "proveedores/proveedores_list.html", {"proveedores": proveedores, "mensaje": 'Ok'})
+
+def eliminarProveedor(request, id_Proveedor):
+     proveedor = Proveedor.objects.get(pk=id_Proveedor)
+     proveedor.delete()
+     proveedores = product.objects.all()
+     return render(request, "proveedores/proveedores_list.html", {"proveedor": proveedores, "mensaje": 'Ok'})

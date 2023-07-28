@@ -1,0 +1,20 @@
+{% extends 'comun/base.html' %}
+
+{% block content %}
+
+<!-- producto_confirm_delete.html -->
+<div class="container mt-5 d-flex justify-content-center"> <!-- Utilizamos las clases d-flex y justify-content-center para centrar el card -->
+  <div class="card">
+    <h5 class="card-header">Eliminar Proveedor</h5>
+    <div class="card-body">
+      <h5 class="card-title">¿Está seguro de eliminar este proveedor?</h5>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'proveedor_list' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

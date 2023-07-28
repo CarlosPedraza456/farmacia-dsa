@@ -64,7 +64,11 @@ TEMPLATES = [
                  'producto/editProductos.html', 
                  'producto/registroProductos.html',
                  'ventas/ventas.html',
-                 'ventas/lista_ventas.html', ],
+                 'ventas/lista_ventas.html',
+                 'proveedores/proveedores_list.html',
+                 'proveedores/proveedores_add.html',
+                 'proveedores/proveedores_delete.html',
+                 'proveedores/proveedores_edit.html', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

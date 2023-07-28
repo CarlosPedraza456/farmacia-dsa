@@ -20,6 +20,15 @@ urlpatterns = [
     path('actualizarProducto/<int:id_producto>', views.actualizarProducto, name='actualizarProducto'),
     path('eliminarProducto/<int:id_producto>', views.eliminarProducto, name='eliminarProducto'),
     
+    
+    path('proveedores/', views.proveedoress ,name='proveedores'),
+    path('registroProveedor/', views.registroProveedores, name='registroProveedor'),
+    path('guardarProveedor/', views.procesarProveedor, name='guardarProveedor'),
+    path('editarProveedor/<int:id_proveedor>', views.editarProveedor, name='editarProveedor'),
+    path('actualizarProveedor/<int:id_proveedor>', views.actualizarProveedor, name='actualizarProveedor'),
+    path('eliminarProveedor/<int:id_proveedor>', views.eliminarProveedor, name='eliminarProveedor'),
+
+
     path('ventas/', views.ventas, name='ventas'),
     path('lista_ventas/', views.lista_ventas, name='lista_ventas'),
 

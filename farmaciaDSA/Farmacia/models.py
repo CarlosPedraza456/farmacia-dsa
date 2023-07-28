@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import model_to_dict
+from django.urls import reverse
 
 # Create your models here.
 class product(models.Model):
@@ -50,7 +51,17 @@ class venta(models.Model):
     cliente_nombre = models.CharField(max_length=35)
     monto_venta = models.FloatField()
     fecha = models.DateField()
+
+
+class Proveedor(models.Model):
     
+    name = models.CharField(max_length=25)
+    cedula= models.IntegerField()
+    phone_number = models.FloatField()
+    email = models.CharField(max_length=25)
+
+
+
 class ProductosEgreso(models.Model):
     egreso = models.ForeignKey(Egreso, on_delete=models.CASCADE)
     producto = models.ForeignKey(product, on_delete=models.CASCADE)
