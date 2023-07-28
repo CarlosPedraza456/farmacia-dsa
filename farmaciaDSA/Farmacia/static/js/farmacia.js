@@ -1,1 +1,1 @@
-alert("script activo")
+//alert("script activo")

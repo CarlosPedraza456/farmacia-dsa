@@ -24,8 +24,11 @@
           Producto registrado con exito
         </div>
     {% endif %}
-    
+    <div class="container-lg">
     <div class="form-group">
+      <div class="row col-12 justify-content-end mb-2 pr-0">
+        <a class="btn btn-success col-md-2" href=" {% url 'ventas' %} ">ir a ventas </a>
+      </div>
       <div class="row">
           <div class="col">
             <label for="producto">Producto</label>
@@ -63,6 +66,7 @@
       </div>
         <button type="submit" class="btn btn-primary">Submit</button>
 
+      </div>
   </form>
 
 {% endblock %}

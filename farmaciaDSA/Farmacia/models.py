@@ -46,7 +46,11 @@ class Egreso(models.Model):
     def __str__(self):
         return str(self.id)
    
-
+class venta(models.Model):
+    cliente_nombre = models.CharField(max_length=35)
+    monto_venta = models.FloatField()
+    fecha = models.DateField()
+    
 class ProductosEgreso(models.Model):
     egreso = models.ForeignKey(Egreso, on_delete=models.CASCADE)
     producto = models.ForeignKey(product, on_delete=models.CASCADE)

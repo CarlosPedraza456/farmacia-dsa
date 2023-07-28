@@ -8,9 +8,9 @@
     <h1>Venta</h1>
     <h2>Lista de Clientes</h2>
     <select class="form-select"  id="select-clientes" aria-label="Default select example">
-        <option selected>Open this select menu</option>
+        <option selected disabled>Open this select menu</option>
         {% for cliente in clientes %}
-        <option value="{{cliente.id}}">{{ cliente.cliente_name }} {{ cliente.cliente_apellido }}</option>
+        <option value="{{cliente.id}}" id="selected-client">{{ cliente.cliente_name }} {{ cliente.cliente_apellido }}</option>
         {% endfor %}
       </select>
       <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
@@ -20,16 +20,53 @@
 
 <div class="container-lg">
     <h2>Lista de Productos</h2>
-    <select class="form-select" id="select-productos" aria-label="Default select example">
-        <option selected>Open this select menu</option>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Producto</th>
+          <th scope="col">Precio de referencia ($)</th>
+          <th scope="col">Disponibilidad</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Lote</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Iva</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+      
         {% for producto in productos %}
-        <option id="selectedProduct" value="{{producto.price_ref}}" >
-                producto: {{ producto.name }} Cantidad disponible: {{ producto.cantidad }} Unidades. Precio($): {{ producto.price_ref }} {% if producto.iva %} $ + iva {% else %} $ {% endif %}
-        </option>
+        <tr>
+          <th scope="row">{{ producto.id }}</th>
+          <td>{{ producto.name }} </td>
+          <td>{{ producto.price_ref }}</td>
+          <td>{{ producto.available }}</td>
+          <td>{{ producto.category }}</td>
+          <td>{{ producto.lote }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td> {% if producto.iva %} Si
+            {% else %}
+            No
+            {% endif %} </td>
+          <td> 
+              <a class="btn btn-light btn-sm" href=" {% url 'editarProducto' producto.id %} ">Editar</a> 
+              <a class="btn btn-light btn-sm" href=" {% url 'eliminarProducto' producto.id %} ">Eliminar</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="10">No hay Productos registrados.</td>
+        </tr>
         {% endfor %}
-
-        
-
+      </tbody>
+   </table>
+   <h2>Seleecciona producto a vender</h2>
+    <select class="form-select" id="select-productos" aria-label="Default select example">
+        <option selected disabled>Open this select menu</option>
+        {% for producto in productos %}
+        <option id="selectedProduct" value="{{producto.price_ref}}" >Producto: {{ producto.name }} Precio($):{{ producto.price_ref }}{% if producto.iva %}$+iva{% else %}${% endif %}</br></option>
+        {% endfor %}
       </select>
       <div class="row col-12 justify-content-end mb-2 pr-0 mt-4">
         <a class="btn btn-success col-md-2 ml-1" href=" {% url 'registroProducto' %} ">Agregar nuevo Producto</a>
@@ -43,14 +80,25 @@
     <div class="product-selected container-lg" id="product-selected-3"> </div>
 
 
-    <div class="product-selected container-lg" id=""> 
-        <button type="button" class="btn btn-primary" onclick="verCuenta()" value="calcular" >calcular</button>
-    </div>
-
-
-
 <div class="container-lg">
-    <h1>Productos seleccionados</h1>
+  <h3>Productos seleccionados</h3>
+  <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Productos</th>
+            <th scope="col">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody id="product-list-selected">
+        </tbody>
+        
+      </table>
+</div>
+<div class="product-selected container-lg" id=""> 
+  <button type="button" class="btn btn-primary" onclick="verCuenta()" value="calcular" >calcular</button>
+</div>
+<div class="container-lg">
+    <h3>Lista de productos agregados</h3>
     <table class="table">
         <thead>
           <tr>
@@ -69,20 +117,13 @@
         <div class="product-selected container-lg" id="total-price"> </div>
       </div>
       <div> <h3>Completar Venta</h3> 
-        <input type="submit" class="btn btn-primary" onclick="verCuenta()" value="Completar" ></input>
+        <input type="submit" class="btn btn-primary" onclick="generarPDF()" value="Completar" ></input>
       </div>
  
 </div>
+
 <script>
-
-    let data = window.data;
-
-    let opciones_producto = []
-    let btn_agregar = document.getElementById('submit')
-    const producto_selecionado = document.getElementById('selectedProduct').innerText
-    let lista_elementos = document.getElementById('product-list')
-    let campo_cantidad_elementos = document.getElementById('cantidad_vender')
-
+    
     var arreglo_lista = [] //este arreglo almacenara 1 lista de "N vengas las cuales tendran los campos: Producto + descripcion, cantidad, el precio y si tiene o no iba"
     
     function arregloCantidades(){
@@ -104,11 +145,18 @@
         if( cantidad > 0 ){
             arreglo_lista.push(producto_vendido);
             alert("producto agregado a la lista de forma correcta")
+            document.querySelector("#product-list-selected").innerHTML += 
+            `<tr>  
+                <td>`+ producto_seleccionado + `</td>
+                <td>`+ cantidad + `</td>
+            </tr>`
             return arreglo_lista;
         }
     }
 
     var arreglo_venta = []
+    var sumaTotal;
+    var precioTotal;
     function verCuenta(){ //Aqui vamos a hacer el recorrido del arreglo para generar la venta  
         //arreglo_venta.push(arreglo_lista)
         var precioTotal;
@@ -144,6 +192,7 @@
         document.querySelector("#total-price").innerHTML = sumaTotal + `$`;
         console.log(sumaTotal)
         console.log(arreglo_lista);
+        return sumaTotal;
     }
 
     //Este es el chivo que mas mea
@@ -179,6 +228,73 @@
     } );
 
 
+    var myImage = document.getElementById("img-logo"), imginfo;
+
+
+    function generarPDF(){
+
+
+        var pdf = new jsPDF( 'p', 'mm', [600, 600]);;
+        var columns =  ["Indice","Producto", "Monto"];
+        var data = [];
+        var arregloData = []
+        var precioTotal;
+        var iva;
+        var sumaTotal = 0;
+        
+        var text_pdf;
+        var rows =[];
+
+        var cliente = document.getElementById("selected-client").innerText;
+        console.log(cliente)
+         //x horizontal, y vertical
+        
+        var distancia = 40
+
+        for(let i = 0; i<arreglo_lista.length; i++){
+          arregloData.push(arreglo_lista[i].producto)
+          if( (arreglo_lista[i].iva) == "false"){
+            precioTotal = arreglo_lista[i].precio * arreglo_lista[i].cantidad;
+            arregloData.push(precioTotal)
+          }
+          if(arreglo_lista[i].iva == "true" ){
+            var precio_Aux = arreglo_lista[i].precio * arreglo_lista[i].cantidad;
+            iva =  (16 * precio_Aux) / 100;
+            var precioTotal = precio_Aux + iva;
+            arregloData.push(precioTotal)
+          }
+          sumaTotal = sumaTotal + precioTotal;
+          distancia = distancia + 10
+          /*text_pdf = "producto: " + arreglo_lista[i].producto + "Precio: " + precioTotal
+          pdf.text(20,distancia, text_pdf )*/
+          data[i] = [i+1, arreglo_lista[i].producto, precioTotal]
+          
+        }
+        //data.push(arregloData)
+
+        //console.log(data)
+        
+        //console.log(myImage);
+        pdf.autoTable(columns,data)
+
+        var z = "Monto total: " + sumaTotal 
+        pdf.text(20,distancia+20, z)
+        pdf.text(20,distancia+10, cliente)
+
+        
+        
+        pdf.setFontSize(4);
+        pdf.save('documento.pdf');
+         /*
+        pdf.autoTable(columns,data, {margin:{top:25}} )
+        
+       
+        img.onload = function(){
+          
+         }*/
+
+        
+    }
 
 //agregarElemento()
 

@@ -7,7 +7,6 @@
 <div class="row col-12 justify-content-end mb-2 pr-0">
   <a class="btn btn-success col-md-2" href=" {% url 'registroProducto' %} ">Agregar nuevo Producto</a>
 </div>
-
 {% if mensaje %}  
     <div class="alert alert-success" role="alert">
       Producto Eliminado con exito
@@ -54,6 +53,6 @@
       </tr>
       {% endfor %}
     </tbody>
-  </table>
+ </table>
 
 {% endblock %}
