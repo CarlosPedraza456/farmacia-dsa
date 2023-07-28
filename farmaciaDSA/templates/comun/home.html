@@ -1,6 +1,92 @@
 {% extends 'comun/base.html' %}
 
 {% block content %}
-<h1>home</h1>
+
+<div class="container mt-5">
+    <h1 class="text-center">Acerca del Sistema FamaVida</h1>
+    <hr>
+
+    <ul class="list-unstyled">
+      <li class="mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="card-title">Gestión de inventario:</h2>
+            <ul class="card-text">
+              <li>Funcionalidades para agregar, editar y eliminar productos del inventario.</li>
+              <li>Seguimiento de la cantidad de stock disponible.</li>
+              <li>Generación de informes sobre el estado del inventario.</li>
+            </ul>
+            <button type="button" class="mt-4  btn btn-outline-info">
+                <a href="{% url 'producto_list' %}" class="text-decoration-none text-primary-emphasis
+
+                ">Productos</a>
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="card-title">Gestión de ventas:</h2>
+            <ul class="card-text">
+              <li>Registro de ventas realizadas.</li>
+              <li>Cálculo automático del precio total de la venta.</li>
+              <li>Generación de facturas o tickets de venta.</li>
+              <li>Historial de ventas para futuras consultas.</li>
+            </ul>
+            
+            </button>
+          </div>
+        </div>
+      </li>
+
+      <li class="mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="card-title">Gestión de clientes:</h2>
+            <ul class="card-text">
+              <li>Registro de nuevos clientes.</li>
+              <li>Actualización de información de los clientes existentes.</li>
+              <li>Búsqueda y filtrado de clientes por diferentes criterios.</li>
+              <li>Almacenamiento de historial de compras de cada cliente.</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="card-title">Gestión de proveedores:</h2>
+            <ul class="card-text">
+              <li>Registro de proveedores.</li>
+              <li>Actualización de información de los proveedores existentes.</li>
+              <li>Seguimiento de pedidos y entregas de los proveedores.</li>
+              <li>Almacenamiento de historial de compras a cada proveedor.</li>
+            </ul>
+            <button type="button" class="mt-4  btn btn-outline-info">
+                <a href="{% url 'proveedor_list' %}" class="text-decoration-none text-primary-emphasis
+
+                ">Proveedor</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="mb-4">
+        <div class="card shadow">
+          <div class="card-body">
+            <h2 class="card-title">Generación de informes:</h2>
+            <ul class="card-text">
+              <li>Generación de informes de ventas diarias, mensuales y anuales.</li>
+              <li>Informes de inventario, incluyendo productos agotados o próximos a agotarse.</li>
+              <li>Estadísticas sobre los productos más vendidos o menos vendidos.</li>
+              <li>Informes financieros, como ingresos y gastos.</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 
 {% endblock %}

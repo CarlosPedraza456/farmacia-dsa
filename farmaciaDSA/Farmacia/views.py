@@ -33,7 +33,6 @@ class Proveedores(ListView):
     model=Proveedor
     template_name="proveedor/proveedor_list.html"
 
-
 class AgregarProveedorView(CreateView):
     model=Proveedor
     form_class=ProveedorForm
@@ -46,7 +45,7 @@ class EditarProveedorView(UpdateView):
     template_name = 'proveedor/proveedor_edit.html'  # Reemplaza con el nombre de tu template
     success_url = reverse_lazy('proveedor_list')  # Reemplaza con la URL a la que deseas redirigir después de editar un producto
 
-class DeleteProductoView(DeleteView):
+class DeleteProveedorView(DeleteView):
     model = Proveedor
     success_url = reverse_lazy('proveedor_list')  # URL a la que se redirigirá después de eliminar el producto
     template_name = 'proveedor/proveedor_delete.html'  # Nombre de tu plantilla de confirmación de eliminación
