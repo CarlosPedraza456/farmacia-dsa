@@ -64,9 +64,7 @@ TEMPLATES = [
                  'producto/editProductos.html', 
                  'producto/registroProductos.html',
                  'ventas/ventas.html',
-                 'ventas/exportarPDF',
-                 'add_ventas.html',
-                 'ticket.html', ],
+                 'ventas/lista_ventas.html', ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

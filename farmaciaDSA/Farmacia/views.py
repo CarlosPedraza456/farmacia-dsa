@@ -94,3 +94,6 @@ def ventas(request):
      products = product.objects.all()
      clients = clientes.objects.all()
      return render(request, 'ventas/ventas.html', {"productos": products,"clientes":clients})
+
+def lista_ventas(request):
+     return render(request, 'ventas/lista_ventas.html',{})
