@@ -1,4 +1,4 @@
-% extends "comun/base.html" %}
+{% extends "comun/base.html" %}
 
 {% block content %}
 
@@ -25,12 +25,9 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre Completo</th>
-            <th scope="col">Cedula</th>
-            <th scope="col">Telefono</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Fecha de registro</th>
-            <th scope="col">Opciones</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha</th>
             
           </tr>
         </thead>
@@ -38,15 +35,9 @@
         
           {% for cliente in clientes %}
           <tr>
-            <th scope="row">{{ cliente.id }}</th>
-            <td>{{ cliente.cliente_name }} {{ cliente.cliente_apellido }}</td>
-            <td>{{ cliente.cliente_cedula }}</td>
-            <td>{{ cliente.cliente_telefono}}</td>
-            <td> {{cliente.cliente_correo}}</td>
-            <td> {{cliente.cliente_fecha}}</td>
+            <th scope="row"></th>
             <td> 
-                <a class="btn btn-primary" href=" {% url 'editarCliente' cliente.id %} ">Editar</a> 
-                <a class="btn btn-primary" href=" {% url 'eliminarCliente' cliente.id %} ">Eliminar</a>
+                
             </td>
           </tr>
           {% empty %}
