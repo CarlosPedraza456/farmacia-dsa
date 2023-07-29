@@ -50,7 +50,7 @@ class Egreso(models.Model):
 class venta(models.Model):
     cliente_nombre = models.CharField(max_length=35)
     monto_venta = models.FloatField()
-    fecha = models.DateField()
+    fecha = models.DateField(auto_now_add=True)
 
 
 class Proveedor(models.Model):

@@ -4,9 +4,11 @@ from django.http import HttpRequest
 from Farmacia.forms import ClienteFormulario
 from Farmacia.forms import ProductoFormulario
 from Farmacia.forms import ProveedorFormulario
+from Farmacia.forms import ventaForm
 from Farmacia.models import clientes
 from Farmacia.models import product
 from Farmacia.models import Proveedor
+from Farmacia.models import venta
 from Farmacia.models import Egreso
 from Farmacia.models import ProductosEgreso
 
@@ -96,6 +98,17 @@ def ventas(request):
      products = product.objects.all()
      clients = clientes.objects.all()
      return render(request, 'ventas/ventas.html', {"productos": products,"clientes":clients})
+
+def registrarVenta(request):
+     venta_agregar = ventaForm()
+     return render(request, "ventas/ventas.html", {"form":venta_agregar})
+
+def procesarVenta(request):
+     venta_Procesar = ventaForm(request.POST)
+     if venta_Procesar.isValid():
+          venta_Procesar.save()
+          venta_Procesar = ventaForm()
+     return render(request, "ventas/ventas.html", {"form": venta_Procesar, "mesaje": 'Ok'})
 
 def lista_ventas(request):
      return render(request, 'ventas/lista_ventas.html',{})

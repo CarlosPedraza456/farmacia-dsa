@@ -1,5 +1,5 @@
 from django import forms
-from .models import clientes, product, Proveedor
+from .models import clientes, product, Proveedor, venta
 
 class ClienteFormulario(forms.ModelForm):
     class Meta:
@@ -17,4 +17,10 @@ class ProveedorFormulario(forms.ModelForm):
 
     class Meta:
         model = Proveedor
+        fields = '__all__'
+
+class ventaForm:
+
+    class Meta:
+        model = venta
         fields = '__all__'
