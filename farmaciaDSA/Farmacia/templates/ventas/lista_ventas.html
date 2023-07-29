@@ -4,19 +4,19 @@
 
 
 
-<h1 class="m-2">Lista de Clientes</h1>
+<h1 class="m-2">Lista de Ventas realizadas en el sistema</h1>
 <button type="button" class="btn btn-primary m-2 ">
-    <a class="text-decoration-none text-light" href=" {% url 'registroCliente' %} "> + Nuevo Cliente</a>
+    <a class="text-decoration-none text-light" href=" {% url 'ventas' %} "> Genera Nueva Venta</a>
 </button>
 
 {% if mensaje %}  
     <div class="alert alert-success" role="alert">
-      Cliente Eliminado con exito
+      Venta Eliminada con exito
     </div>
 {% endif %}
 
 
-<p class="m-2 text-secondary">Verifique los Clientes agregados</p>
+<p class="m-2 text-secondary">Verifique las ventas agregadas</p>
 
 <div class="container">
   <div class="row justify-content-center">

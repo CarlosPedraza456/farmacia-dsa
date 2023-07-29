@@ -2,6 +2,8 @@
 
 {% block content %} 
 
+
+
 <div class="container mt-4 mb-4">
   <h1>Venta</h1>
 </div>
@@ -69,7 +71,7 @@
       </tbody>
    </table>
    <h2>Seleecciona producto a vender</h2>
-    <select class="form-select" id="select-productos" aria-label="Default select example">
+    <select class="form-select" id="select-productos" aria-label="Default select example" name="cliente_nombre">
         <option selected disabled>Despliega para ver los productos registrados</option>
         {% for producto in productos %}
         <option id="selectedProduct" value="{{producto.price_ref}}" >Producto: {{ producto.name }} Precio($):{{ producto.price_ref }}{% if producto.iva %}$+iva{% else %}${% endif %}</br></option>
