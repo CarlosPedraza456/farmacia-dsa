@@ -31,16 +31,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for provider in proveedores %}
+                    {% for proveedor in proveedores %}
                     <tr>
-                        <td>{{ provider.id}}</td>
-                        <td>{{ provider.cedula }}</td>
-                        <td>{{ provider.name }}</td>
-                        <td>{{ provider.phone_number}}</td>
-                        <td>{{ provider.email}}</td>
+                        <th>{{ proveedor.id }}</th>
+                        <td>{{ proveedor.cedula }}</td>
+                        <td>{{ proveedor.name }}</td>
+                        <td>{{ proveedor.phone_number }}</td>
+                        <td>{{ proveedor.email }}</td>
                         <td>
-                            <a href="{% url 'editarProveedor' provider.id %}" class="btn btn-primary">Editar</a>
-                            <a href="{% url 'eliminarProveedor' provider.id %}" class="btn btn-primary">Eliminar</a>
+                            <a href="{% url 'editarProveedor' proveedor.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'eliminarProveedor' proveedor.id %}" class="btn btn-primary">Eliminar</a>
                         </td>
                     </tr>
                     {% empty %}

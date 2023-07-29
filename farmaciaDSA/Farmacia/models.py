@@ -54,7 +54,6 @@ class venta(models.Model):
 
 
 class Proveedor(models.Model):
-    
     name = models.CharField(max_length=25)
     cedula= models.IntegerField()
     phone_number = models.FloatField()

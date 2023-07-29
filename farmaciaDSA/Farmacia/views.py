@@ -104,7 +104,6 @@ def registrarVenta(request):
      venta_agregar = ventaForm()
      return render(request, "ventas/ventas.html", {"form":venta_agregar})
 
-
 def procesarVenta(request):
      ventaProc = ventaForm(request.POST)
      products = product.objects.all()
@@ -123,11 +122,11 @@ def lista_ventas(request):
 
 def proveedoress(request):
      providers = Proveedor.objects.all()
-     return render(request, 'proveedores/proveedores_list.html', {"proveedores":providers})
+     return render(request, "proveedores/proveedores_list.html", {"proveedores":providers})
 
 def registroProveedores(request):
      proveedor_agregar = ProveedorFormulario()
-     return render(request, "proveedores/proveedores_add.html", {"form":proveedor_agregar})
+     return render(request, 'proveedores/proveedores_add.html', {"form":proveedor_agregar})
 
 def procesarProveedor(request):
      proveedor_Procesar = ProveedorFormulario(request.POST)
@@ -135,7 +134,7 @@ def procesarProveedor(request):
           proveedor_Procesar.save()
           proveedor_Procesar = ProveedorFormulario()
      
-     return render(request, "proveedores/proveedores_add.html", {"form":proveedor_Procesar, "mensaje": 'Ok'})
+     return render(request, 'proveedores/proveedores_add.html', {"form":proveedor_Procesar, "mensaje": 'Ok'})
 
 def editarProveedor(request, id_Proveedor):
      proveedor_Editar = Proveedor.objects.filter(id=id_Proveedor).first()
