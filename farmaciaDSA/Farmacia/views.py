@@ -97,21 +97,27 @@ def eliminarProducto(request, id_producto):
 def ventas(request):
      products = product.objects.all()
      clients = clientes.objects.all()
+     venta_agregar = ventaForm()
      return render(request, 'ventas/ventas.html', {"productos": products,"clientes":clients})
 
 def registrarVenta(request):
      venta_agregar = ventaForm()
      return render(request, "ventas/ventas.html", {"form":venta_agregar})
 
+
 def procesarVenta(request):
-     venta_Procesar = ventaForm(request.POST)
-     if venta_Procesar.isValid():
-          venta_Procesar.save()
-          venta_Procesar = ventaForm()
-     return render(request, "ventas/ventas.html", {"form": venta_Procesar, "mesaje": 'Ok'})
+     ventaProc = ventaForm(request.POST)
+     products = product.objects.all()
+     clients = clientes.objects.all()
+     if ventaProc.is_valid():
+          ventaProc.save()
+          ventaProc = ventaForm()
+
+     return render(request, "ventas/ventas.html", {"form": ventaProc, "mesaje": 'Ok', "productos":products, "clientes":clients})
 
 def lista_ventas(request):
-     return render(request, 'ventas/lista_ventas.html',{})
+     vendass = venta.objects.all()
+     return render(request, 'ventas/lista_ventas.html',{"ventas":vendass})
 
 """"Proveedores"""
 

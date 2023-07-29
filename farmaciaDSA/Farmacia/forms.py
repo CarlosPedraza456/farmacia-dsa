@@ -19,7 +19,7 @@ class ProveedorFormulario(forms.ModelForm):
         model = Proveedor
         fields = '__all__'
 
-class ventaForm:
+class ventaForm(forms.ModelForm):
 
     class Meta:
         model = venta

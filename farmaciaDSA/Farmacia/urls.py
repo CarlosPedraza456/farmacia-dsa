@@ -31,6 +31,7 @@ urlpatterns = [
 
     path('ventas/', views.ventas, name='ventas'),
     path('lista_ventas/', views.lista_ventas, name='lista_ventas'),
+    path('guardarVenta/', views.procesarVenta, name ='guardarVenta')
 
 
 

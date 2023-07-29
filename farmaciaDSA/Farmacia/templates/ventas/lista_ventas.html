@@ -33,11 +33,17 @@
         </thead>
         <tbody>
         
-          {% for cliente in clientes %}
+          {% for v in ventas %}
           <tr>
-            <th scope="row"></th>
+            <th scope="row">{{v.id}}</th>
             <td> 
-                
+                {{v.cliente_nombre}}
+            </td>
+            <td> 
+                {{v.monto_venta}}
+            </td>
+            <td> 
+                {{v.fecha}}
             </td>
           </tr>
           {% empty %}
